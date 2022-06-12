@@ -154,7 +154,7 @@ int isconstant(char symbols[])
 
 void identify_tokens(char string[])
 {
-    int i = 0, flag = 0, ws = 0;
+    int i = 0, flag = 0, ws = 0, s = 0;
     char word[50] = "";
 
     while(string[i] != '\0')
@@ -170,9 +170,16 @@ void identify_tokens(char string[])
             flag++;
         }
 
-        if(!flag)stradd(word, string[i]);
+        if(string[i] == '"' && s == 0)s = 1;
+        else if(string[i] == '"' && s == 1)s = 2;
 
-        if(flag || string[i + 1] == '\0')
+        if(!flag || s)
+        {
+            stradd(word, string[i]);
+            if(s == 2)s = 0;
+        }
+
+        if((flag || string[i + 1] == '\0') && s == 0)
         {
             if(iskeyword(word))
                 printf("\n%s is a keyword.\n", word);
