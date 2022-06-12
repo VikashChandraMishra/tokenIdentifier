@@ -1,41 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#define SIZE 100
-
-char s[SIZE];
-int top = -1;
-
-int isempty()
-{
-    if(top == -1) return 1;
-    else return 0;
-}
-
-int isfull()
-{
-    if(top == SIZE - 1) return 1;
-    else return 0;
-}
-
-void push(char c)
-{
-    if(isfull()) return;
-    else s[++top] = c;
-}
-
-int pop()
-{
-    if(isempty()) return (-1);
-    else top--;
-    return 1;
-}
-
-char get_top()
-{
-    if(!isempty()) return s[top];
-    else return '0';
-}
 
 int isoperator(char symbol)
 {
